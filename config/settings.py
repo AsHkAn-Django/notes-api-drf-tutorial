@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount', # Added
     'dj_rest_auth', # Added
     'dj_rest_auth.registration', # Added
+    'drf_yasg', # Added
     
     'notes', # Added
 ]

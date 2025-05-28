@@ -7,11 +7,19 @@ from .permissions import IsOwner
 
 
 class NoteList(generics.ListCreateAPIView):
-    queryset = Note.objects.all()
     serializer_class = NoteSerializer
     
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+        
+    def get_queryset(self):
+        querryset = Note.objects.all()
+        title = self.request.query_params.get('title')
+        
+        if title:
+            querryset = querryset.filter(title__icontains=title)
+        
+        return querryset
         
 
 class NoteDetail(generics.RetrieveUpdateDestroyAPIView):
